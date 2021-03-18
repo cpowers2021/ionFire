@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { IonicStorageModule } from '@ionic/storage';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -20,7 +21,8 @@ import { AngularFireMessagingModule } from '@angular/fire/messaging';
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
   AngularFireModule.initializeApp(environment.firebase), AngularFirestoreModule,
-  AngularFireMessagingModule, AngularFireFunctionsModule, AngularFireAuthModule],
+  AngularFireMessagingModule, AngularFireFunctionsModule, AngularFireAuthModule,
+  IonicModule.forRoot(), IonicStorageModule.forRoot()],
   providers: [{ provide: {RouteReuseStrategy, Firebase}, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
