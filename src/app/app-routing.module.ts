@@ -16,11 +16,7 @@ const routes: Routes = [
     loadChildren: () => import('./todo/todo.module').then( m => m.TodoPageModule)
   },
   {
-    path: 'todo',
-    loadChildren: () => import('./todo/todo.module').then( m => m.TodoPageModule)
-  },
-  {
-    path: 'tutorial',
+    path: 'tutorial', canActivate: [TutorialGuard],
     loadChildren: () => import('./tutorial/tutorial.module').then( m => m.TutorialPageModule)
   },
 ];
