@@ -7,6 +7,12 @@ import { Observable, of } from 'rxjs';
 import { switchMap, take, map } from 'rxjs/operators';
 import { DbService } from './db.service';
 
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
+import { Platform } from '@ionic/angular';
+
+import { LoadingController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -86,5 +92,25 @@ private async handleRedirect() {
   await this.setRedirect(false);
   return result;
 }
+//Login with google plus for iOS and Android
+  async nativeGoogleLogin(): Promise<any> {
+    const gplusUser = await this.gplus.login({
+      webClientId: '432394406834-425i66soal93var1qltsaofa8gfp0q94.apps.googleusercontent.com',
+      offline: true,
+      scopes: 'profile email'
+    });
+    return await this.afAuth.auth.signInWithCredential(
+          auth.GoogleAuthProvider.credential(gplusUser.idToken));
+  }
+
+  uid() {
+    return this.user$
+      .pipe(
+        take(1),
+        map(u => u && u.uid)
+      ).toPromise();
+  }
+
+
 
 }
