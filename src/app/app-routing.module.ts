@@ -13,7 +13,8 @@ const routes: Routes = [
   },
   {
     path: 'todo',
-    loadChildren: () => import('./todo/todo.module').then( m => m.TodoPageModule)
+    loadChildren: () => import('./todo/todo.module').then( m => m.TodoPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'tutorial', canActivate: [TutorialGuard],
