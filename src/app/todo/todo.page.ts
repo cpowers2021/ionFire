@@ -56,4 +56,12 @@ export class TodoPage implements OnInit {
     this.db.updateAt(`todos/${todo.id}`, { status });
   }
 
+  async presentTodoForm(todo?: any) {
+    const modal = await this.modal.create({
+      component: TodoFormComponent,
+      componentProps: { todo }
+    });
+    return await modal.present();
+  }
+
 }
