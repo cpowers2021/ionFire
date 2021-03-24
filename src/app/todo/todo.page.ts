@@ -13,7 +13,10 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./todo.page.scss'],
 })
 export class TodoPage implements OnInit {
+  todos;
+  filtered;
 
+  filter = new BehaviorSubject(null);
   constructor(public dc: DbService, public modal: ModalController, public auth: AuthService) { }
 
   ngOnInit() {
@@ -23,7 +26,21 @@ export class TodoPage implements OnInit {
           ref.where('uid', '==', user.uid).orderBy('createdAt', 'desc').limit(25)
         )
     ), shareReplay(1)
+    this.filtered = this.filter.pipe(
+      switchMap(filter => {
+        return this.todos.pipe(
+          map(arr =>
+          (arr as any[]).filter(
+            obj => (status ? obj.status === status : true)
+          )
+        );
+      })
+    )
    );
+  }
+
+  updateFilter(val) {
+    this.filter.next(val);
   }
 
   trackById(idx, todo) {
