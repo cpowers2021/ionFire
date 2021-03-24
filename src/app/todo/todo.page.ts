@@ -26,4 +26,7 @@ export class TodoPage implements OnInit {
    );
   }
 
+  trackById(idx, todo) {
+  return todo.id;
+  }
 }
