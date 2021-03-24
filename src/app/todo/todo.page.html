@@ -10,6 +10,7 @@
       <ion-label>
         <span [class.complete]="todo.status === 'complete'"></span>
       </ion-label>
+      <ion-checkbox (click)="toggleStatus(todo)" [checked]="todo.status === 'complete'"></ion-checkbox>
     </ion-item>
   </ion-list>
 </ion-content>
